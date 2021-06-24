@@ -22,7 +22,7 @@ For more information, please refer to:
 
  ## Contain
 
- - [GraphQL Monster](https://www.graphql.monsters)
+ - [GraphQL Monster](https://www.graphql.monster)
  - [Apollo Client](https://www.apollographql.com/docs/react)
  - [gh-pages](https://www.npmjs.com/package/gh-pages)
  - [spa github pages](https://github.com/rafgraph/spa-github-pages)
