@@ -1,18 +1,18 @@
-# cra-template-protectql-typescript
+# cra-template-gql-monster-typescript
 
-The official [ProtectQL](https://protectql.com)+TS template for [Create React App](https://github.com/facebook/create-react-app). With appolo GraphQL and user management (Login/Register/Reset Password,...)
+The official [GraphQL Monster](https://www.graphql.monster)+TS template for [Create React App](https://github.com/facebook/create-react-app). With appolo GraphQL and user management (Login/Register/Reset Password,...)
 
 ## usage
-To use this template, add `--template protectql-typescript` when creating a new app. The app will apollo client for GraphQL connect
+To use this template, add `--template graphql-monster-typescript` when creating a new app. The app will apollo client for GraphQL connect
 
 For example:
 
 ```sh
-npx create-react-app my-app --template protectql-typescript
+npx create-react-app my-app --template gql-monster-typescript
 
 # or
 
-yarn create react-app my-app --template protectql-typescript
+yarn create react-app my-app --template gql-monster-typescript
 ```
 
 For more information, please refer to:
@@ -22,7 +22,7 @@ For more information, please refer to:
 
  ## Contain
 
- - [ProtectQL](https://www.protectql.com)
+ - [GraphQL Monster](https://www.graphql.monsters)
  - [Apollo Client](https://www.apollographql.com/docs/react)
  - [gh-pages](https://www.npmjs.com/package/gh-pages)
  - [spa github pages](https://github.com/rafgraph/spa-github-pages)
