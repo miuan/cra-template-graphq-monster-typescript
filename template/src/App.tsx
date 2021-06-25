@@ -1,11 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
-import { ApolloProvider } from '@apollo/client';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Register from "./pages/public/Login/Register";
 import Login from "./pages/public/Login/Login";
@@ -22,11 +16,9 @@ import UsersList from "./pages/admin/Users/UsersList";
 import UserRolesList from "./pages/admin/UserRoles/UserRolesList";
 import UserRoleEdit from "./pages/admin/UserRoles/UserRolesEdit";
 
-
 export default function App() {
-
   return (
-    <Router>
+    <>
       <Header />
       {/*
               A <Switch> looks through all its children <Route>
@@ -42,49 +34,52 @@ export default function App() {
         <Route exact path="/login">
           <Login />
         </Route>
-        <Route path="/login/facebook" >
-          <PassportCallback type={'facebook'} />
+        <Route path="/login/facebook">
+          <PassportCallback type={"facebook"} />
         </Route>
-        <Route path="/login/github" >
-          <PassportCallback type={'github'} />
+        <Route path="/login/github">
+          <PassportCallback type={"github"} />
         </Route>
-        <Route path="/login/google" >
-          <PassportCallback type={'google'} />
+        <Route path="/login/google">
+          <PassportCallback type={"google"} />
         </Route>
         <Route path="/register">
           <Register />
         </Route>
 
-        <Route path="/forgotten-password/:token" component={ForgottenPasswordReset} />
+        <Route
+          path="/forgotten-password/:token"
+          component={ForgottenPasswordReset}
+        />
         <Route exact path="/forgotten-password">
           <ForgottenPassword />
         </Route>
-
 
         <Route path="/verify-user/:verifyToken" component={VerifyUser} />
 
         <ProtectedRoute path="/user/dashboard">
           <UserDashboard />
         </ProtectedRoute>
-        <Route path="/user/info">
-          {/* <UserInfo /> */}
-        </Route>
+        <Route path="/user/info">{/* <UserInfo /> */}</Route>
 
-        <ProtectedRoute path="/admin/users" role={'admin'}>
+        <ProtectedRoute path="/admin/users" role={"admin"}>
           <UsersList adminMode={true} />
         </ProtectedRoute>
-        <ProtectedRoute path="/admin/roles" role={'admin'}>
+        <ProtectedRoute path="/admin/roles" role={"admin"}>
           <UserRolesList adminMode={true} />
         </ProtectedRoute>
-        <ProtectedRoute path="/user/roles/:id" role={'admin'} children={<UserRoleEdit />} />
+        <ProtectedRoute
+          path="/user/roles/:id"
+          role={"admin"}
+          children={<UserRoleEdit />}
+        />
       </Switch>
-    </Router>
+    </>
   );
 }
 
 // You can think of these components as "pages"
 // in your app.
-
 
 function About() {
   return (
@@ -93,5 +88,3 @@ function About() {
     </div>
   );
 }
-
-
