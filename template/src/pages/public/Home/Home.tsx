@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../../../logo.svg';
 // import { Counter } from './features/counter/Counter';
 import './Home.css';
 
@@ -10,7 +9,7 @@ function Home() {
         <img src={logo} className="App-logo" alt="logo" />
         {/* <Counter /> */}
         <p>
-          This page is public and accesible for all visitors / users 
+          This page is public and accesible for all visitors / users
           Edit <code>src/containers/public/Home/Home.tsx</code> and save to reload.
         </p>
         <span>
