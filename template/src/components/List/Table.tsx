@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Table as BTable, Button } from 'react-bootstrap'
-
-import { useQuery, useMutation } from '@apollo/client'
-import { IListRowParams, ListRow } from './Row'
-import Loading from '../Loading/Loading'
-import DeleteModal from '../DeleteModal/DeleteModal'
-import Unauthorized from '../Unauthorized/Unauthorized'
+import { useMutation, useQuery } from '@apollo/client'
 import { DocumentNode } from 'graphql'
+import React, { useState } from 'react'
+import { Table as BTable } from 'react-bootstrap'
+import DeleteModal from '../DeleteModal/DeleteModal'
+import Loading from '../Loading/Loading'
+import Unauthorized from '../Unauthorized/Unauthorized'
+import { IListRowParams, ListRow } from './Row'
 import { IFilteredField } from './RowItem'
+
 
 export interface IFilterWithParams {
   filter?: string
@@ -34,28 +33,22 @@ export interface ITableList {
 
 export const Table: React.FC<ITableList> = ({ filter, name, adminMode = false, queries, fields, onEdit, getEditLink }) => {
   const [unauthorized, setUnauthorized] = useState(false)
-  const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [deleteObject, setDeleteObject] = useState(null)
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const [deletingOnDeleteDialog, setDeletingOnDeleteDialog] = useState(false)
 
-  const [loading, setLoading] = useState(true)
   const [data, setData] = useState<any>([])
   const [error, setError] = useState<any>()
 
-  const { refetch: userRefetch, loading: userLoading } = useQuery(adminMode ? queries.ADMIN_LIST_QUERY : queries.USER_LIST_QUERY, {
+  const { refetch: userRefetch, loading } = useQuery(adminMode ? queries.ADMIN_LIST_QUERY : queries.USER_LIST_QUERY, {
     onError: (e) => {
-      console.log('onError >>> ', e.message)
-      if (e.message == 'GraphQL error: Unauhorized') {
+      if (e.message === 'GraphQL error: Unauhorized') {
         setUnauthorized(true)
       } else {
         setError(e)
       }
     },
     onCompleted: (d) => {
-      console.log('user: onCompleted', d)
-      setLoading(false)
-
       const dataFields = Object.getOwnPropertyNames(d)
       if (dataFields.length > 0 && d[dataFields[0]].length > 0) {
         setData(d[dataFields[0]])
@@ -66,16 +59,14 @@ export const Table: React.FC<ITableList> = ({ filter, name, adminMode = false, q
     variables: { filter },
   })
 
-  const [deleteProjectMutation, { loading: deleteLoading, error: deleteError }] = useMutation(queries.DELETE_MUTATION, {
+  const [deleteProjectMutation] = useMutation(queries.DELETE_MUTATION, {
     errorPolicy: 'none',
     onCompleted: (data: any) => {
-      console.log('DELETE', data.deleteProject)
       onHideDidaloDelete()
       userRefetch()
     },
     onError: (e) => {
-      console.log('onError >>> ', e.message)
-      if (e.message == 'GraphQL error: Unauhorized') {
+      if (e.message === 'GraphQL error: Unauhorized') {
         setUnauthorized(true)
       }
     },
@@ -102,9 +93,9 @@ export const Table: React.FC<ITableList> = ({ filter, name, adminMode = false, q
   }
 
   if (unauthorized) {
-    return <Unauthorized where={'projects'} />
+    return <Unauthorized where={name} />
   }
-  if (userLoading) return <Loading what={'projects'} />
+  if (loading) return <Loading what={name} />
 
   return (
     <div>
@@ -131,7 +122,7 @@ export const Table: React.FC<ITableList> = ({ filter, name, adminMode = false, q
         show={showDeleteDialog}
         onHide={onHideDidaloDelete}
         onDelete={doDelete}
-        category={'project'}
+        modelName={name}
         deleteObject={deleteObject}
         deleting={deletingOnDeleteDialog}
       />

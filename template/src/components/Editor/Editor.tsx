@@ -45,14 +45,14 @@ export const Editor = ({ name, form, id, renameError, onUpdated, updateCache, qu
   }
 
   const skipLoading = !localId
-  const { loading, error } = useQuery(query.QUERY, {
+  const { loading } = useQuery(query.QUERY, {
     variables: { id: localId },
     skip: skipLoading,
     onCompleted: (loadedDataRaw: any) => {
       updateDataFromLoaded(loadedDataRaw)
     },
     onError: (e) => {
-      if (e.message == 'GraphQL error: Unauhorized') {
+      if (e.message === 'GraphQL error: Unauhorized') {
         setUnauthorized(true)
       }
     },
@@ -95,7 +95,7 @@ export const Editor = ({ name, form, id, renameError, onUpdated, updateCache, qu
         })
       }
     },
-    [localId, storedData],
+    [localId, createProjectMutation, updateProjectMutation],
   )
 
   if (unauthorized) {

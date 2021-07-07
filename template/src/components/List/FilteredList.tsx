@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import FilterItem from './FilterItem'
-import { Navbar, Button } from 'react-bootstrap'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Button } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
 import './FilteredList.css'
+import FilterItem from './FilterItem'
 import { IFilteredField } from './RowItem'
 import Table, { ITableList, ITableQueries } from './Table'
 
@@ -27,7 +27,7 @@ const createFilter = () => {
 const addAnd = (node: any, filter: any) => {
   let obj: any = filter
 
-  if (node.name != 'AND') {
+  if (node.name !== 'AND') {
     obj = [obj]
     obj.name = 'AND'
   }
@@ -66,7 +66,7 @@ export const FilteredList: React.FC<IProjectFilterList> = ({ name, userId, admin
   const history = useHistory()
 
   // console.log(filter, listFilter)
-  const createDefaultFilter = (userId?: string) => {
+  const createDefaultFilter = useCallback((userId?: string) => {
     const defaultFilter = createFilter()
 
     if (userId) {
@@ -78,7 +78,7 @@ export const FilteredList: React.FC<IProjectFilterList> = ({ name, userId, admin
     }
 
     return defaultFilter
-  }
+  }, [staticFilter])
 
   const processFilter = (filter: any) => {
     const filterDestructed = filterDestruct(filter)
@@ -91,7 +91,7 @@ export const FilteredList: React.FC<IProjectFilterList> = ({ name, userId, admin
   useEffect(() => {
     const defaultFilter = createDefaultFilter(userId)
     processFilter(defaultFilter)
-  }, [userId])
+  }, [userId, createDefaultFilter])
 
   const onFilterChange = useCallback(
     (f: string | null) => {
@@ -103,7 +103,7 @@ export const FilteredList: React.FC<IProjectFilterList> = ({ name, userId, admin
 
       processFilter(defaultFilter)
     },
-    [userId],
+    [userId, createDefaultFilter],
   )
 
   const onCreateNew = () => {

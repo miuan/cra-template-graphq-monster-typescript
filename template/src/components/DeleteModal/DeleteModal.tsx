@@ -5,12 +5,12 @@ export interface IDeleteModalParams {
   show: boolean
   onHide: () => void
   onDelete: (deleteObject: any) => void
-  category: string
+  modelName: string
   deleteObject?: any
   deleting?: boolean
 }
 
-export const DeleteModal: React.FC<IDeleteModalParams> = ({ show, onHide, onDelete, category, deleteObject, deleting }) => {
+export const DeleteModal: React.FC<IDeleteModalParams> = ({ show, onHide, onDelete, modelName, deleteObject, deleting }) => {
   const onDeleteAction = () => {
     if (!deleting) {
       onDelete(deleteObject)
@@ -31,11 +31,11 @@ export const DeleteModal: React.FC<IDeleteModalParams> = ({ show, onHide, onDele
         <Modal.Body>
           {!deleting ? (
             <p>
-              Are you sure, you want delete {category} item with name <b>'{deleteObject && deleteObject.name}'</b> and id <i>'{deleteObject && deleteObject.id}'</i>
+              Are you sure, you want delete {modelName} item with name <b>'{deleteObject && deleteObject.name}'</b> and id <i>'{deleteObject && deleteObject.id}'</i>
             </p>
           ) : (
             <p>
-              Deleting {category} item with name '{deleteObject && deleteObject.name}' and id '{deleteObject && deleteObject.id}' ...
+              Deleting {modelName} item with name '{deleteObject && deleteObject.name}' and id '{deleteObject && deleteObject.id}' ...
             </p>
           )}
         </Modal.Body>

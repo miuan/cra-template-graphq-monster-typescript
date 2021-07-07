@@ -1,20 +1,18 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
-import Register from "./pages/public/Login/Register";
-import Login from "./pages/public/Login/Login";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Header from "./components/Header/Header";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import UserRoleEdit from "./pages/admin/UserRoles/UserRolesEdit";
+import UserRolesList from "./pages/admin/UserRoles/UserRolesList";
+import UsersList from "./pages/admin/Users/UsersList";
+import Home from "./pages/public/Home/Home";
 import ForgottenPassword from "./pages/public/Login/ForgottenPassword";
 import ForgottenPasswordReset from "./pages/public/Login/ForgottenPasswordReset";
-import VerifyUser from "./pages/public/Login/VerifyUser";
+import Login from "./pages/public/Login/Login";
 import { PassportCallback } from "./pages/public/Login/PassportCallback";
-
-import Home from "./pages/public/Home/Home";
-import Header from "./components/Header/Header";
+import Register from "./pages/public/Login/Register";
+import VerifyUser from "./pages/public/Login/VerifyUser";
 import UserDashboard from "./pages/user/UserDashboard/UserDashboard";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import UsersList from "./pages/admin/Users/UsersList";
-import UserRolesList from "./pages/admin/UserRoles/UserRolesList";
-import UserRoleEdit from "./pages/admin/UserRoles/UserRolesEdit";
 
 export default function App() {
   return (
@@ -78,13 +76,3 @@ export default function App() {
   );
 }
 
-// You can think of these components as "pages"
-// in your app.
-
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  );
-}
